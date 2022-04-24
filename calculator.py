@@ -10,6 +10,7 @@ def create_window(theme, params):
             justification='right', 
             expand_x=True, 
             pad=(10, 20),
+            right_click_menu=theme_menu,
             key='-EVAL-')],
         [sg.Text(
             '0', 
@@ -17,6 +18,7 @@ def create_window(theme, params):
             justification='right', 
             expand_x=True, 
             pad=(10, 20),
+            right_click_menu=theme_menu,
             key='-RESULT-')],
         [sg.Button('C', key='-CLEAR-', expand_x=True), sg.Button('=', key='-ENTER-', expand_x=True)],
         [sg.Button(7, **params), sg.Button(8, **params), sg.Button(9, **params), sg.Button('*', **params)],
@@ -25,7 +27,7 @@ def create_window(theme, params):
         [sg.Button(0, expand_x=True), sg.Button('.', **params,), sg.Button('+', **params)]
         ]
 
-    return sg.Window('Simple Calculator', layout, alpha_channel=1, right_click_menu=theme_menu)
+    return sg.Window('Simple Calculator', layout, alpha_channel=1, element_justification='center')
 
 button_params = {'size': (6, 3)}
 theme_menu = ['menu', ['Random', 'Black', 'BlueMono', 'BrownBlue', 'Dark', 'DarkAmber', 
@@ -45,7 +47,7 @@ while True:
 
     if event in theme_menu[1]:
         window.close()
-        window = create_window(event)
+        window = create_window(event, button_params)
 
     if event in decimal_buttons:
         current_number += event
